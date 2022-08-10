@@ -1,17 +1,18 @@
 class TrafficGenerator {
   traffic = [];
 
-  constructor(road, carWidth, carHeight, amount) {
+  constructor(road, carWidth, carHeight) {
     this.road = road;
     this.carWidth = carWidth;
     this.carHeight = carHeight;
-    this.amount = amount;
+
+    this.lines = [];
 
     // We'll only add cars up to 10000 pixels high
-    this.maxHeight = this.road.top;
+    this.maxHeight = -10000;
 
     // Traffic generates in steps
-    this.step = this.carHeight * 3;
+    this.step = this.carHeight * 4;
 
     this.stepCount = Math.round(Math.abs(this.maxHeight) / this.step);
   }
@@ -26,7 +27,7 @@ class TrafficGenerator {
       const y = -(i + 1) * this.step;
 
       // Determine how many cars will be in this row
-      const amount = randomIntBetween(0, this.road.laneCount - 1);
+      const amount = biasedIntBetween(1, this.road.laneCount - 1);
 
       if (!amount) continue;
 

@@ -49,3 +49,17 @@ function getRandomColor() {
   const hue = 290 + Math.random() * 260;
   return "hsl(" + hue + ",100%,60%)";
 }
+
+function randomBetween(min, max) {
+  return Math.random() * (max - min + 1) + min;
+}
+
+function randomIntBetween(min, max) {
+  return Math.floor(randomBetween(min, max));
+}
+
+function biasedIntBetween(min, max) {
+  // Make it a lot more likely to get 2 cars
+  min = randomBetween(0, 5) > min + 1 ? min + 1 : min;
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
